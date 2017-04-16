@@ -24,6 +24,7 @@ var News = React.createClass({
         </div>
       );
     })
+    
 
     return (
       <div className="news">
