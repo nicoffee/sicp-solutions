@@ -1,8 +1,7 @@
 #lang racket
 
 (define (pascalTriangle row column)
-  (if (= column 1)
+  (if (or (= column 1) (= row 1) (= row column))
        1
-  (+ pascalTriangle (- row 1) (- column 1)
-     pascalTriangle (- row 1) (+ column 1)))
-)
+  (+ (pascalTriangle (- row 1) (- column 1))
+     (pascalTriangle (- row 1) column))))
