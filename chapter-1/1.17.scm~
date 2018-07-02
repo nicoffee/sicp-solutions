@@ -1,6 +1,0 @@
-#lang racket
- 
-(define (double a)
-  (* a 2))
- 
-(provide double)
