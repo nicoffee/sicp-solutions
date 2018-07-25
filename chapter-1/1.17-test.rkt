@@ -1,7 +1,7 @@
 #lang racket
  
 (require rackunit
-         "1.17.scm")
+         "1.17.rkt")
 
 (check-equal? (fast-mul 4 5) 20 "Simple amultiplication 1")
 (check-equal? (fast-mul 0 125) 0 "Simple amultiplication 2")
