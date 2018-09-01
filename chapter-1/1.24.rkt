@@ -1,5 +1,7 @@
 #lang racket
 
+(#%require (lib "27.ss" "srfi"))
+
 (require rackunit
          "utils.rkt")
 
@@ -12,14 +14,32 @@
          (report-prime (- (current-milliseconds) start-time) n))))
 
 (define (report-prime elapsed-time prime)
-  (display " *** ")
   (display prime)
   (display " *** ")
   (display elapsed-time)
   (newline))
 
-(define (prime? n)
-  (= n (smallest-divisor n)))
+(define (expmod base exp m)
+  (cond ((= exp 0) 1)
+        ((even? exp)
+         (remainder (square (expmod base (/ exp 2) m))
+                    m))
+        (else
+         (remainder (* base (expmod base (- exp 1) m))
+                    m))))
+
+(define (fermat-test n)
+  (define (try-it a)
+    (= (expmod a n n) a))
+  (try-it (+ 1 (random-integer (- n 1)))))
+
+(define (fast-prime? n times)
+  (cond ((= times 0) true)
+        ((fermat-test n) (fast-prime? n (- times 1)))
+        (else false)))
+
+ (define (prime? n) 
+   (fast-prime? n 100))
 
 (define (smallest-divisor n)
   (find-divisor n 2))
