@@ -27,7 +27,3 @@
   (display ",")
   (display (y-point p))
   (display ")"))
-
-(define A (make-point 0 0))
-(define B (make-point 4 2))
-(define AB (make-segment A B))
